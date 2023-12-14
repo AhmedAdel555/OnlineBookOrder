@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CartService {
-    private CartRepository cartRepository;
-    private UserRepository userRepository;
-    private BookRepository bookRepository;
-    private CartMapper cartMapper;
+    private final CartRepository cartRepository;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
+    private final CartMapper cartMapper;
 
+    @Autowired
     public CartService(CartRepository cartRepository, UserRepository userRepository, BookRepository bookRepository, CartMapper cartMapper) {
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
@@ -22,7 +23,6 @@ public class CartService {
         this.cartMapper = cartMapper;
     }
 
-    @Autowired
 
     public void AddToCart(Long userId, Long bookId, int quantity){
 

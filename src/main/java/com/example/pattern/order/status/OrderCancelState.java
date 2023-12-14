@@ -1,13 +1,15 @@
 package com.example.pattern.order.status;
 
 import com.example.pattern.order.Order;
-import jdk.jshell.spi.ExecutionControl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 public class OrderCancelState implements IOrderState{
-    private Order order;
+
 
     public OrderCancelState(Order order) {
-        this.order = order;
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.pattern.payment.strategies;
 
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

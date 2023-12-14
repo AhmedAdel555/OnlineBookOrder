@@ -14,6 +14,7 @@ import com.example.pattern.payment.strategies.IPaymentStrategy;
 import com.example.pattern.payment.strategies.PaymentStarategy;
 import com.example.pattern.user.User;
 import com.example.pattern.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -36,6 +37,7 @@ public class OrderService implements IOrderService{
 
     private final OrderStateFactory orderStateFactory;
 
+    @Autowired
     public OrderService(UserRepository userRepository, CartItemRepository cartItemRepository, OrderRepository orderRepository, Inventory calculateTotalAmount, OrderPaymentInfoRepository orderPaymentInfoRepository, PaymentFactory paymentFactory, OrderMapper orderMapper, OrderStateFactory orderStateFactory) {
         this.userRepository = userRepository;
         this.cartItemRepository = cartItemRepository;

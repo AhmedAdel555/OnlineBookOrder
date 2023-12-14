@@ -11,7 +11,7 @@ import java.util.function.Function;
 @Service
 public class CartItemMapper{
 
-    private BookMapper bookMapper;
+    private final BookMapper bookMapper;
 
     @Autowired
     public CartItemMapper(BookMapper bookMapper) {

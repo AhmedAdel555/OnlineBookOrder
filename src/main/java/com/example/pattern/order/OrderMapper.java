@@ -1,14 +1,16 @@
 package com.example.pattern.order;
 
 import com.example.pattern.order.orderitem.OrderItemMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 
 @Service
 public class OrderMapper {
-    private OrderItemMapper orderItemMapper;
+    private final OrderItemMapper orderItemMapper;
 
+    @Autowired
     public OrderMapper(OrderItemMapper orderItemMapper) {
         this.orderItemMapper = orderItemMapper;
     }

@@ -1,7 +1,9 @@
 package com.example.pattern.order.status;
 
 import com.example.pattern.order.Order;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderStateFactory {
     public IOrderState getOrderState(Order order){
         if(order.getStatus().equals(OrderStatus.CANCELLED)){

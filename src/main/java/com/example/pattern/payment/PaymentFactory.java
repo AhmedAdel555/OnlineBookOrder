@@ -4,7 +4,9 @@ import com.example.pattern.payment.strategies.CashPayment;
 import com.example.pattern.payment.strategies.CreditCardPayment;
 import com.example.pattern.payment.strategies.IPaymentStrategy;
 import com.example.pattern.payment.strategies.PaymentStarategy;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PaymentFactory {
 
     public IPaymentStrategy getPaymentStrategy(OrderPaymentInfo orderPaymentInfo){

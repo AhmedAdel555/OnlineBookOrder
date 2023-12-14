@@ -6,6 +6,7 @@ import com.example.pattern.cart.Cart;
 import com.example.pattern.cart.cartitem.CartItem;
 import com.example.pattern.user.User;
 import com.example.pattern.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Inventory {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
 
+    @Autowired
     public Inventory(UserRepository userRepository, BookRepository bookRepository) {
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;

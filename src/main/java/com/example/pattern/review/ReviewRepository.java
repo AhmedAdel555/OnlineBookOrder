@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-    @Query("SELECT br FROM BookReview br WHERE br.book.id = :bookId")
+    @Query("SELECT br FROM Review br WHERE br.book.id = :bookId")
     List<Review> findAllBookReviewsForBook(Long bookId);
 }

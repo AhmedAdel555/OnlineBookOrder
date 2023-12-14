@@ -1,5 +1,6 @@
 package com.example.pattern.order;
 import com.example.pattern.payment.strategies.PaymentStarategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class ProxyOrderService implements IOrderService{
 
     private final Inventory inventory;
 
+    @Autowired
     public ProxyOrderService(OrderService orderService, Inventory inventory) {
         this.orderService = orderService;
         this.inventory = inventory;

@@ -4,6 +4,7 @@ import com.example.pattern.book.Book;
 import com.example.pattern.book.BookRepository;
 import com.example.pattern.user.User;
 import com.example.pattern.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +12,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
-    private UserRepository userRepository;
-    private BookRepository bookRepository;
-    private ReviewRepository reviewRepository;
-    private ReviewMapper reviewMapper;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
+    private final ReviewRepository reviewRepository;
+    private final ReviewMapper reviewMapper;
 
+    @Autowired
     public ReviewService(UserRepository userRepository, BookRepository bookRepository, ReviewRepository reviewRepository, ReviewMapper reviewMapper) {
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
