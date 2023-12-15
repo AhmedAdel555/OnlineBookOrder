@@ -75,6 +75,9 @@ public class CartService {
     public CartViewDto ShowCart(Long userId){
         User user = userRepository.findById(userId).orElseThrow();
         Cart cart = user.getCart();
+        if(cart == null){
+            return null;
+        }
         return cartMapper.MapToCartViewDto(cart);
     }
 }

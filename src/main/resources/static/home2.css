@@ -1,0 +1,266 @@
+body{
+    background: #fdffff;
+}
+.home{
+position: relative;
+    background: url(background.jpg);
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    height: 760px;
+    margin: -8px;
+}
+
+
+.nav{
+    
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    padding: 10px 100px;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+    background-color: #706f6f;
+    opacity: 0.5;
+}
+.image{
+    
+    left: 100px;
+    top: 15px;
+}
+.list_nav{
+    position: relative;
+    display: flex;
+    
+
+}
+
+.nav .image img{
+    width: 200px;
+}
+.list_nav ul{
+    display: flex;
+    margin-right: 200px;
+}
+.list_nav  li{
+    list-style: none;
+    padding: 15px;
+    
+
+}
+a {
+    color: #fdffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+a:hover{
+    color: rgb(235, 187, 116);
+}
+.black_layer{
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-color:#000;
+    opacity:0.2;
+
+}
+.l1{
+    color: rgb(255, 239, 220);
+}
+.text{
+    position: relative;
+    width: 100%;
+}
+.txt{
+    position: absolute;
+    color: #FFf;
+
+    top: 200px;
+    left: 350px;
+    z-index: 100;
+    text-align: center;
+}
+.welcome{
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 25px;
+    
+}
+.family{
+    margin-top: -20px;
+    margin-bottom: -10px;
+    font-size: 70px;
+    font-family: 'Alegreya', serif;
+    font-weight: 500;
+}
+.we{
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 25px;
+    
+    
+}
+.we .we{
+    margin-top: -10px;
+}
+.button{
+    
+    justify-content:space-around;
+    padding: 20px;
+    
+}
+button{
+padding: 20px 30px;
+
+margin: 10px;
+}
+.b2{
+    border: 2px solid whitesmoke;
+    background-color: Transparent;
+    font-family: 'Alegreya', serif;
+    font-size: 20px;
+    color: #fdffff;
+    border-radius: 10px;
+}
+.b1{
+    font-family: 'Alegreya', serif;
+    background-color: rgb(235, 187, 116) ;
+    border: none;
+    font-size: 20px;
+    color: #fdffff;
+    border-radius: 10px;
+}
+button:hover{
+    color: #000;
+    background-color: #fdffff;
+}
+.img1{
+    
+    border: 1px solid  rgb(235, 187, 116);
+    border-radius: 50%;
+    height: 20px;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.who{
+    display: flex;
+    margin: 100px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+ .location{
+    display: flex;
+    margin-top: 100px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    background-color: #ebebeb;
+    width: 100%;
+    height: 100%;
+
+}
+.whom {
+    height: 600px;
+}
+.whotxt {
+    margin: 40px 0 0 80px;
+}
+.locp{
+    margin: 150px 100px 0 150px;
+    font-size: 20px;
+}
+.txtp{
+    margin: 50px 0 50px;
+    color: #706f6f;
+}
+.p{
+    color: #595757;
+
+}
+.locimg1{
+    height: 450px;
+    margin: 100px;
+}
+.ourBackery{
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.ourtxt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    
+}
+.image1{
+    height: 300px;
+    margin-left: 0px;
+}
+.ourtxtimg{
+    display: flex;
+    
+    margin-top: 50px;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+.ourtxt1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    margin-left: -20px;
+}
+.h2{
+    margin-top: -2px;
+}
+.h1{
+    font-weight: bold;
+}
+.img2{
+    
+    border: 1px solid  #8e7754;
+    background-color: #8e7754;
+    border-radius: 50%;
+    height: 20px;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 10px;
+    margin-right: 20px;
+}
+.map{
+    margin-left: 100px;
+    height: 700px;
+}
+iframe{
+    height: 600px;
+    
+}
+.conant{
+    display: flex;
+    margin-top: 100px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    background-color:#ebebeb;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+
+}
+.loc{
+    display: flex;
+    margin: 100px  100px 0;
+}
+.conantxt{
+    margin: 50px 0 50px;
+}
+.mmm{
+    width:1500px;
+    margin-top: 100px;
+}

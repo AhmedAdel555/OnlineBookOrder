@@ -39,7 +39,7 @@ public class BookService {
 
     public void editBook(BookDto bookDto){
         Book book = bookRepository.findById(bookDto.getId()).orElseThrow();
-        Category category = categoryRepository.findCategoryByName(bookDto.getCategoryName()).orElseThrow();
+        Category category = categoryRepository.findCategoryByName(bookDto.getCategoryName().strip()).orElseThrow();
         book.setTitle(bookDto.getTitle());
         book.setNumberOfAvailableUnits(bookDto.getNumberOfAvailableUnits());
         book.setPrice(bookDto.getPrice());
@@ -71,5 +71,9 @@ public class BookService {
     public BookViewDto getBookById(Long bookId){
         Book book = bookRepository.findById(bookId).orElseThrow();
         return bookMapper.MapToBookViewDto(book);
+    }
+
+    public int countBooks(){
+        return bookRepository.countBooks();
     }
 }

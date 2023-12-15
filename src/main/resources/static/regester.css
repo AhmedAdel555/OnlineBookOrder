@@ -1,0 +1,68 @@
+ body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-image: url(picture/Picture1.jpg);
+    background-repeat: no-repeat;
+    background-size: 2500px 800px;
+    
+}
+.regist {
+    width: 600px;
+    position:absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    color: rgb(142, 140, 136);
+}
+.regist h1 {
+    float: left;
+    font-size: 30px;
+    border-bottom: 6px solid rgb(238, 238, 232);
+    margin-bottom: 50px;
+    padding: 13px 0;
+}
+.form ::placeholder{
+color:rgb(228, 140, 111);
+}
+.first {
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 3px solid  rgb(238, 238, 232);
+    
+}
+.first input {
+     border: none;
+     outline: none;
+     background: none;
+     color: white;
+     font-size: 18px;
+     width: 80%;
+     float: left;
+     margin: 0 10px;
+}
+a {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    margin-top: 50px;
+    color: rgb(255, 238, 229);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-decoration: none;
+    font-size: 20px;
+    overflow: hidden;
+    transition: 0.2s;
+    border-radius: 20px;
+    background: rgb(162, 160, 159);
+}
+a:hover {
+    color: rgb(121, 125, 131);
+    background: #f5f6ff;
+    box-shadow: 0 0 10px #f6f7fd, 0 0 40px #29292b, 0 0 80px #86878b;
+   
+    transition-delay: 0.3s; 
+}

@@ -43,4 +43,9 @@ public class ProxyOrderService implements IOrderService{
     public List<OrderViewDto> getUserOrders(Long userId) {
         return orderService.getUserOrders(userId);
     }
+
+    @Override
+    public int countPendingOrders() {
+        return orderService.countPendingOrders();
+    }
 }

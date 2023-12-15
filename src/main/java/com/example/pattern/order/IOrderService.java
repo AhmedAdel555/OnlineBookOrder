@@ -10,4 +10,5 @@ public interface IOrderService {
     void cancelOrder(Long orderId);
     List<OrderViewDto> getAllOrders();
     List<OrderViewDto> getUserOrders(Long userId);
+    int countPendingOrders();
 }

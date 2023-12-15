@@ -117,6 +117,12 @@ public class OrderService implements IOrderService{
         return orders.stream().map(o -> orderMapper.MapToOrderViewDto(o)).collect(Collectors.toList());
     }
 
+    @Override
+    public int countPendingOrders() {
+        return orderRepository.countPendingOrders();
+    }
+
+
     private LocalDate parseExpirationDate(String expirationDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
         return LocalDate.parse(expirationDate, formatter);

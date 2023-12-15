@@ -12,4 +12,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b WHERE b.category.name = :categoryName")
     List<Book> findAllByCategoryName(String categoryName);
+
+    @Query("SELECT COUNT(b) FROM Book b")
+    int countBooks();
 }
