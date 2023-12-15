@@ -43,7 +43,7 @@ public class BookService {
         book.setTitle(bookDto.getTitle());
         book.setNumberOfAvailableUnits(bookDto.getNumberOfAvailableUnits());
         book.setPrice(bookDto.getPrice());
-        book.setEdition(book.getEdition());
+        book.setEdition(bookDto.getEdition());
         book.setCoverUrl(bookDto.getCoverUrl());
         book.setBookStatus(bookDto.getBookStatus());
         book.setCategory(category);

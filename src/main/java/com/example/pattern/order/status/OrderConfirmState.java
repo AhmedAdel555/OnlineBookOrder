@@ -19,11 +19,11 @@ public class OrderConfirmState implements IOrderState{
 
     @Override
     public void Confirm() {
-        throw new UnsupportedOperationException("Method not implemented");
+
     }
 
     @Override
     public void Cancel() {
-        order.setStatus(OrderStatus.CANCELLED);
+        throw new UnsupportedOperationException("Method not implemented");
     }
 }

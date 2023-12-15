@@ -40,5 +40,4 @@ public class CartController {
         cartService.deleteFromCart(1L ,cartItemId);
         return "redirect:/cart";
     }
-
 }

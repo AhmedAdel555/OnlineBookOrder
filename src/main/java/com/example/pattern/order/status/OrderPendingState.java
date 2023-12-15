@@ -13,7 +13,7 @@ public class OrderPendingState implements IOrderState{
     }
     @Override
     public void Pending() {
-        throw new UnsupportedOperationException("Method not implemented");
+
     }
 
     @Override

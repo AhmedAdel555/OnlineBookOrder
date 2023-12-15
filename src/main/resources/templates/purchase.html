@@ -1,0 +1,96 @@
+<!-- Heading and other content above the form -->
+<!-- Heading and other content above the form -->
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Heading and other content above the form -->
+<div class="container">
+    <h3 class="text-center mb-4">Shopping Cart</h3>
+
+    <!-- Display Total Price -->
+    <p class="mb-4 display-4">Total Price: $<span th:text="${totalPrice}">0.00</span></p>
+
+    <!-- Shopping cart table (as in your original code) -->
+
+    <!-- Payment form -->
+    <form action="/orders/create" method="post">
+        <!-- Other form fields -->
+
+        <!-- Payment Method -->
+        <div class="mb-3">
+            <label for="paymentStarategy" class="form-label">Select Payment Method:</label>
+            <select class="form-select" id="paymentStarategy" name="paymentStarategy" required>
+                <option value="CASH">Cash</option>
+                <option value="CREDITCARD">Credit Card</option>
+            </select>
+        </div>
+
+        <!-- Credit Card Number (visible only if Credit Card is selected) -->
+        <div class="mb-3" id="creditCardFields" style="display: none;">
+            <label for="creditCardNumber" class="form-label">Credit Card Number:</label>
+            <input type="text" class="form-control" id="creditCardNumber" name="creditCardNumber" value=""/>
+        </div>
+
+        <!-- Expiry Date (visible only if Credit Card is selected) -->
+        <div class="mb-3" id="creditCardExpiryFields" style="display: none;">
+            <label for="creditCardExpiry" class="form-label">Expiry Date:</label>
+            <input type="text" class="form-control" id="creditCardExpiry" name="creditCardExpiry" placeholder="MM/YYYY" value="" />
+        </div>
+
+        <!-- CVV (visible only if Credit Card is selected) -->
+        <div class="mb-3" id="creditCardCvvFields" style="display: none;">
+            <label for="creditCardCvv" class="form-label">CVV:</label>
+            <input type="text" class="form-control" id="creditCardCvv" name="creditCardCvv" value=""/>
+        </div>
+
+        <!-- JavaScript to show/hide credit card fields based on payment method -->
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-dark">Purchase</button>
+    </form>
+
+</div>
+
+<script>
+    document.getElementById('paymentStarategy').addEventListener('change', function () {
+        var creditCardFields = document.getElementById('creditCardFields');
+        var creditCardExpiryFields = document.getElementById('creditCardExpiryFields');
+        var creditCardCvvFields = document.getElementById('creditCardCvvFields');
+
+        if (this.value === 'CREDITCARD') {
+            creditCardFields.style.display = 'block';
+            creditCardExpiryFields.style.display = 'block';
+            creditCardCvvFields.style.display = 'block';
+        } else {
+            creditCardFields.style.display = 'none';
+            creditCardExpiryFields.style.display = 'none';
+            creditCardCvvFields.style.display = 'none';
+        }
+    });
+</script>
+
+<!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript to handle payment method change -->
+<script>
+    document.getElementById('paymentMethod').addEventListener('change', function () {
+        var visaCardSection = document.getElementById('visaCardSection');
+        if (this.value === 'visa') {
+            visaCardSection.style.display = 'block';
+        } else {
+            visaCardSection.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>

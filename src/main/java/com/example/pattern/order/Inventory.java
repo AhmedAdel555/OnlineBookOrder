@@ -23,7 +23,8 @@ public class Inventory {
         this.bookRepository = bookRepository;
     }
 
-    public double calculateTotalAmount(Cart cart){
+    public double calculateTotalAmount(Long userId){
+        Cart cart = userRepository.findById(userId).orElseThrow().getCart();
         double totalAmount = 0.0;
         List<CartItem> cartItems = cart.getCartItems();
         for (CartItem cartItem : cartItems) {

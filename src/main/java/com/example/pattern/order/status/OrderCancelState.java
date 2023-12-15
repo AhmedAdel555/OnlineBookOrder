@@ -24,6 +24,6 @@ public class OrderCancelState implements IOrderState{
 
     @Override
     public void Cancel() {
-        throw new UnsupportedOperationException("Method not implemented");
+
     }
 }

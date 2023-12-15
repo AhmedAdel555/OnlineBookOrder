@@ -41,28 +41,31 @@
          <th>Action</th>
      </tr>
      </thead>
-     <tbody class="cart-items">
-     <!-- Loop through cartItems -->
-     <tr th:each="cartItem : ${cart.cartItemsDto}">
-         <!-- Display book title -->
-         <td th:text="${cartItem.bookViewDtoDto.title}">Book Title</td>
-         <!-- Display price -->
-         <td th:text="${cartItem.bookViewDtoDto.price}">0.00</td>
-         <!-- Display quantity -->
-         <td th:text="${cartItem.quantity}">1</td>
-         <!-- You can add an action button here if needed -->
-         <td>
-             <form th:action="@{/delete-from-cart/{cartItemId}(cartItemId=${cartItem.id})}" th:method="post" class="d-inline">
-                 <!-- Button to remove cartItem -->
-                 <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-             </form>
-         </td>
-     </tr>
+     <!-- Loop through cartItems only if cart is not null -->
+     <tbody class="cart-items" th:if="${cart != null}">
+     <!-- Check if cart.cartItemsDto is not null -->
+     <th:block th:if="${cart.cartItemsDto != null}">
+         <tr th:each="cartItem : ${cart.cartItemsDto}">
+             <!-- Display book title -->
+             <td th:text="${cartItem.bookViewDtoDto.title}">Book Title</td>
+             <!-- Display price -->
+             <td th:text="${cartItem.bookViewDtoDto.price}">0.00</td>
+             <!-- Display quantity -->
+             <td th:text="${cartItem.quantity}">1</td>
+             <!-- You can add an action button here if needed -->
+             <td>
+                 <form th:action="@{/delete-from-cart/{cartItemId}(cartItemId=${cartItem.id})}" th:method="post" class="d-inline">
+                     <!-- Button to remove cartItem -->
+                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                 </form>
+             </td>
+         </tr>
+     </th:block>
      </tbody>
-</table>
+ </table>
 
     <div class="btn-purchase" style="margin-top: 10%;">
-        <a href="order.html"><button type="button"  class="btn btn-dark btn-purchase "><i class="fa-solid fa-cart-shopping " style="margin-right: 6%;"></i>PURCHASE</button></a>
+        <a href="/purchase"><button type="button"  class="btn btn-dark btn-purchase "><i class="fa-solid fa-cart-shopping " style="margin-right: 6%;"></i>PURCHASE</button></a>
     </div>
 
 </section>

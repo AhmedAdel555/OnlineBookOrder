@@ -26,7 +26,8 @@ public class Cart {
     private Long id;
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
-    @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @CreationTimestamp
     private LocalDateTime createdOn;

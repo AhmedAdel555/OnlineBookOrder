@@ -74,7 +74,6 @@ public class BookController {
 
     @PostMapping("/books/edit")
     public String editBook(@Valid @ModelAttribute("bookDto") BookDto bookDto, BindingResult result, RedirectAttributes redirectAttributes){
-        System.out.println(bookDto);
         if(result.hasErrors()){
             redirectAttributes.addFlashAttribute("failedmessage", "something being wrong");
             return "redirect:/edit-book/"+bookDto.getId();

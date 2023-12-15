@@ -59,6 +59,8 @@
                 <span>orders table</span></a>
         </li>
 
+
+
     </ul>
     <!-- End of Sidebar -->
 
@@ -72,36 +74,41 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 mt-5 text-gray-800">Categories Table</h1>
-
+                <h1 class="h3 mb-2 mt-5 text-gray-800">Order Table</h1>
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Categories Table</h6>
-                        <a href= "/add-category" class="btn btn-primary btn-sm">Add category</a>
+                        <h6 class="m-0 font-weight-bold text-primary">Order Table</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="categoryTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Actions</th>
+                                    <th>Totel Price</th>
+                                    <th>Status</th>
+                                    <th>Payment Method</th>
+                                    <th> Actions </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!-- Iterate through the list of categories -->
-                                <tr th:each="category : ${categories}">
-                                    <td th:text="${category.id}">1</td>
-                                    <td th:text="${category.name}">Category Title</td>
+                                <!-- Iterate through the list of orders -->
+                                <tr th:each="order : ${orders}">
+                                    <td th:text="${order.id}">1</td>
+                                    <td th:text="${order.totalPrice}">0.0</td>
+                                    <td th:text="${order.status}">PENDING</td>
+                                    <td th:text="${order.orderPaymentInfo.paymentStarategy}">Payment Method</td>
                                     <td>
-                                        <!-- Button to delete category (You can use a form for delete action if needed) -->
-                                        <!-- Form for delete action -->
-                                        <form th:action="@{/categories/{categoryId}/delete(categoryId=${category.id})}" th:method="post" class="d-inline">
-                                            <input type="hidden" name="id" th:value="${category.id}" />
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        <!-- Button to confirm order -->
+                                        <form th:action="@{/orders/confirm/{orderId}(orderId=${order.id})}" th:method="post" class="d-inline">
+                                            <input type="hidden" name="id" th:value="${order.id}" />
+                                            <button type="submit" class="btn btn-success btn-sm">Confirm</button>
+                                        </form>
+                                        <!-- Button to cancel order -->
+                                        <form th:action="@{/orders/cancel/{orderId}(orderId=${order.id})}" th:method="post" class="d-inline">
+                                            <input type="hidden" name="id" th:value="${order.id}" />
+                                            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -110,7 +117,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
             </div>

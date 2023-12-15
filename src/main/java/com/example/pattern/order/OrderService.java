@@ -66,11 +66,11 @@ public class OrderService implements IOrderService{
             orderItem.setQuantity(quantity);
             orderItems.add(orderItem);
         }
-        double totalPrice = calculateTotalAmount.calculateTotalAmount(cart);
+        double totalPrice = calculateTotalAmount.calculateTotalAmount(userId);
         order.setOrderItems(orderItems);
         order.setTotalPrice(totalPrice);
-        IOrderState state = orderStateFactory.getOrderState(order);
-        state.Pending();
+        order.setStatus(OrderStatus.PENDING);
+
 
         orderRepository.save(order);
         cartItemRepository.deleteAll(cartItems);
@@ -81,12 +81,14 @@ public class OrderService implements IOrderService{
         paymentInfo.setTotalPrice(totalPrice);
 
         // Set credit card information if applicable
-        if (String.valueOf(paymentStarategy).equalsIgnoreCase(String.valueOf(PaymentStarategy.CASH))) {
+        if (String.valueOf(paymentStarategy).equalsIgnoreCase(String.valueOf(PaymentStarategy.CREDITCARD))) {
             paymentInfo.setCreditCardNumber(creditCardNumber);
             paymentInfo.setCreditCardExpiry(parseExpirationDate(creditCardExpiry));
             paymentInfo.setCreditCardCvv(creditCardCvv);
         }
+        paymentInfo.setPaymentStarategy(paymentStarategy);
         orderPaymentInfoRepository.save(paymentInfo);
+
     }
 
     @Override
@@ -107,7 +109,7 @@ public class OrderService implements IOrderService{
 
     @Override
     public List<OrderViewDto> getAllOrders() {
-        List<Order> orders = orderRepository.findAll();
+        List<Order> orders = orderRepository.findPendingOrders();
         return orders.stream().map(o -> orderMapper.MapToOrderViewDto(o)).collect(Collectors.toList());
     }
 
