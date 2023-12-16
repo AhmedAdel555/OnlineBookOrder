@@ -144,8 +144,7 @@ public class OrderService implements IOrderService{
 
 
     private LocalDate parseExpirationDate(String expirationDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
-        return LocalDate.parse(expirationDate, formatter);
+        return LocalDate.parse(expirationDate);
     }
 
 }
