@@ -5,8 +5,11 @@ import com.example.pattern.book.BookRepository;
 import com.example.pattern.cart.cartitem.CartItem;
 import com.example.pattern.user.User;
 import com.example.pattern.user.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CartService {
@@ -29,10 +32,14 @@ public class CartService {
         User user = userRepository.findById(userId).orElseThrow();
         Book book = bookRepository.findById(bookId).orElseThrow();
 
-        Cart cart = user.getCart();
-        if (cart == null) {
+        Optional<Cart> cartFromDB = cartRepository.findByUserId(userId);
+        Cart cart = null;
+        if (!cartFromDB.isPresent()) {
             cart = new Cart();
-            user.setCart(cart);
+            cart.setUser(user);
+        }
+        else{
+            cart = cartFromDB.get();
         }
 
         CartItem existingCartItem = cart.getCartItems().stream()
@@ -57,7 +64,7 @@ public class CartService {
     public void deleteFromCart(Long userId, Long cartItemId) {
         User user = userRepository.findById(userId).orElseThrow();
 
-        Cart cart = user.getCart();
+        Cart cart = cartRepository.findByUserId(userId).orElseThrow();
         if (cart == null) {
             throw new RuntimeException("User's cart not found");
         }
@@ -73,11 +80,10 @@ public class CartService {
     }
 
     public CartViewDto ShowCart(Long userId){
-        User user = userRepository.findById(userId).orElseThrow();
-        Cart cart = user.getCart();
-        if(cart == null){
+        Optional<Cart> cart = cartRepository.findByUserId(userId);
+        if(!cart.isPresent()){
             return null;
         }
-        return cartMapper.MapToCartViewDto(cart);
+        return cartMapper.MapToCartViewDto(cart.get());
     }
 }

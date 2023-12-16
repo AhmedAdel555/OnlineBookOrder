@@ -4,10 +4,7 @@ import com.example.pattern.payment.strategies.PaymentStarategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,7 +38,7 @@ public class OrderController {
     public String showMyOrders(Model model){
         List<OrderViewDto> orders = proxyOrderService.getUserOrders(1L);
         model.addAttribute("orders", orders);
-        return "";
+        return "myorders";
     }
 
     @PostMapping("/orders/create")
@@ -50,14 +47,14 @@ public class OrderController {
         return "redirect:/purchase";
     }
 
-    @PostMapping("/confirm/{orderId}")
+    @PostMapping("/orders/confirm/{orderId}")
     public String confirmOrder(@PathVariable("orderId") Long orderId) {
         // Logic to confirm the order
         proxyOrderService.confirmOrder(orderId);
         return "redirect:/dashboard/orders";
     }
 
-    @PostMapping("/cancel/{orderId}")
+    @PostMapping("/orders/cancel/{orderId}")
     public String cancelOrder(@PathVariable Long orderId) {
         // Logic to cancel the order
         proxyOrderService.cancelOrder(orderId);

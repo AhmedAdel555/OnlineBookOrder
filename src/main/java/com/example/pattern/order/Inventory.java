@@ -3,6 +3,7 @@ package com.example.pattern.order;
 import com.example.pattern.book.Book;
 import com.example.pattern.book.BookRepository;
 import com.example.pattern.cart.Cart;
+import com.example.pattern.cart.CartRepository;
 import com.example.pattern.cart.cartitem.CartItem;
 import com.example.pattern.user.User;
 import com.example.pattern.user.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Inventory {
@@ -17,16 +19,22 @@ public class Inventory {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
 
+    private final CartRepository cartRepository;
+
     @Autowired
-    public Inventory(UserRepository userRepository, BookRepository bookRepository) {
+    public Inventory(UserRepository userRepository, BookRepository bookRepository, CartRepository cartRepository) {
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
+        this.cartRepository = cartRepository;
     }
 
     public double calculateTotalAmount(Long userId){
-        Cart cart = userRepository.findById(userId).orElseThrow().getCart();
+        Optional<Cart> cart = cartRepository.findByUserId(userId);
+        if(!cart.isPresent()){
+            return 0;
+        }
         double totalAmount = 0.0;
-        List<CartItem> cartItems = cart.getCartItems();
+        List<CartItem> cartItems = cart.get().getCartItems();
         for (CartItem cartItem : cartItems) {
             Book book = cartItem.getBook();
             int quantity = cartItem.getQuantity();
@@ -37,9 +45,11 @@ public class Inventory {
     }
 
     public boolean CheckInventory(Long userId){
-        User user =  userRepository.findById(userId).orElseThrow();
-        Cart cart = user.getCart();
-        List<CartItem> cartItems = cart.getCartItems();
+        Optional<Cart> cart = cartRepository.findByUserId(userId);
+        if(!cart.isPresent()){
+            return false;
+        }
+        List<CartItem> cartItems = cart.get().getCartItems();
         for (CartItem cartItem : cartItems) {
             Book book = cartItem.getBook();
             int requestedQuantity = cartItem.getQuantity();

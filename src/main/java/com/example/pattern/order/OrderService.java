@@ -1,6 +1,7 @@
 package com.example.pattern.order;
 import com.example.pattern.book.Book;
 import com.example.pattern.cart.Cart;
+import com.example.pattern.cart.CartRepository;
 import com.example.pattern.cart.cartitem.CartItem;
 import com.example.pattern.cart.cartitem.CartItemRepository;
 import com.example.pattern.order.orderitem.OrderItem;
@@ -20,60 +21,76 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderService implements IOrderService{
 
     private final UserRepository userRepository;
-    private final CartItemRepository cartItemRepository;
     private final OrderRepository orderRepository;
-    private final Inventory calculateTotalAmount;
     private final OrderPaymentInfoRepository orderPaymentInfoRepository;
-
     private final PaymentFactory paymentFactory;
     private final OrderMapper orderMapper;
-
     private final OrderStateFactory orderStateFactory;
+    private final CartRepository cartRepository;
 
     @Autowired
-    public OrderService(UserRepository userRepository, CartItemRepository cartItemRepository, OrderRepository orderRepository, Inventory calculateTotalAmount, OrderPaymentInfoRepository orderPaymentInfoRepository, PaymentFactory paymentFactory, OrderMapper orderMapper, OrderStateFactory orderStateFactory) {
+    public OrderService(UserRepository userRepository, OrderRepository orderRepository, OrderPaymentInfoRepository orderPaymentInfoRepository, PaymentFactory paymentFactory, OrderMapper orderMapper, OrderStateFactory orderStateFactory, CartRepository cartRepository) {
         this.userRepository = userRepository;
-        this.cartItemRepository = cartItemRepository;
         this.orderRepository = orderRepository;
-        this.calculateTotalAmount = calculateTotalAmount;
         this.orderPaymentInfoRepository = orderPaymentInfoRepository;
         this.paymentFactory = paymentFactory;
         this.orderMapper = orderMapper;
         this.orderStateFactory = orderStateFactory;
+        this.cartRepository = cartRepository;
     }
 
     @Override
     public void craeteOrder(Long userId, PaymentStarategy paymentStarategy, String creditCardNumber, String creditCardExpiry, String creditCardCvv) {
         User user =  userRepository.findById(userId).orElseThrow();
-        Cart cart = user.getCart();
+        Optional<Cart> cart = cartRepository.findByUserId(userId);
+        if(!cart.isPresent()){
+            return;
+        }
         Order order = new Order();
         order.setUser(user);
-        List<CartItem> cartItems = cart.getCartItems();
+        List<CartItem> cartItems = cart.get().getCartItems();
         List<OrderItem> orderItems = new ArrayList<>();
-        for (CartItem cartItem : cartItems) {
-            Book book = cartItem.getBook();
-            int quantity = cartItem.getQuantity();
+        double totalPrice = 0;
+        Book book;
+        int quantity = 0;
+        for(int i = 0 ; i < cartItems.size(); i++){
+            book = cartItems.get(i).getBook();
+            quantity = cartItems.get(i).getQuantity();
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);
             orderItem.setBook(book);
             orderItem.setQuantity(quantity);
             orderItems.add(orderItem);
+            double itemTotal = book.getPrice() * quantity;
+            totalPrice += itemTotal;
         }
-        double totalPrice = calculateTotalAmount.calculateTotalAmount(userId);
+
         order.setOrderItems(orderItems);
         order.setTotalPrice(totalPrice);
         order.setStatus(OrderStatus.PENDING);
 
-
         orderRepository.save(order);
-        cartItemRepository.deleteAll(cartItems);
+
+        List<CartItem> itemsToRemove = new ArrayList<>();
+
+        for (CartItem cartItem : cart.get().getCartItems()) {
+            itemsToRemove.add(cartItem);
+        }
+
+        for (CartItem cartItem : itemsToRemove) {
+            cart.get().getCartItems().remove(cartItem);
+            cartItem.setCart(null);
+            cartRepository.save(cart.get());
+        }
 
         // Save payment information
         OrderPaymentInfo paymentInfo = new OrderPaymentInfo();
@@ -89,6 +106,7 @@ public class OrderService implements IOrderService{
         paymentInfo.setPaymentStarategy(paymentStarategy);
         orderPaymentInfoRepository.save(paymentInfo);
 
+
     }
 
     @Override
@@ -98,6 +116,7 @@ public class OrderService implements IOrderService{
         state.Confirm();
         IPaymentStrategy paymentStrategy = paymentFactory.getPaymentStrategy(order.getOrderPaymentInfo());
         paymentStrategy.processPayment(order.getTotalPrice());
+        orderRepository.save(order);
     }
 
     @Override
@@ -105,6 +124,7 @@ public class OrderService implements IOrderService{
         Order order = orderRepository.findById(orderId).orElseThrow();
         IOrderState state = orderStateFactory.getOrderState(order);
         state.Cancel();
+        orderRepository.save(order);
     }
 
     @Override

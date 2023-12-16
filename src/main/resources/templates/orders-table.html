@@ -98,7 +98,7 @@
                                     <td th:text="${order.id}">1</td>
                                     <td th:text="${order.totalPrice}">0.0</td>
                                     <td th:text="${order.status}">PENDING</td>
-                                    <td th:text="${order.orderPaymentInfo.paymentStarategy}">Payment Method</td>
+                                    <td th:text="${order.orderPaymentInfo}">Payment Method</td>
                                     <td>
                                         <!-- Button to confirm order -->
                                         <form th:action="@{/orders/confirm/{orderId}(orderId=${order.id})}" th:method="post" class="d-inline">

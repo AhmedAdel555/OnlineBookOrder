@@ -12,9 +12,7 @@ public class OrderPendingState implements IOrderState{
         this.order = order;
     }
     @Override
-    public void Pending() {
-
-    }
+    public void Pending() {throw new UnsupportedOperationException("Method not implemented");}
 
     @Override
     public void Confirm() {

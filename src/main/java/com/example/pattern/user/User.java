@@ -38,8 +38,8 @@ public class User {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Cart cart;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private Cart cart;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

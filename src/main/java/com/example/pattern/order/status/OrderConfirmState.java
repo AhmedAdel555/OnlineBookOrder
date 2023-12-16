@@ -18,9 +18,7 @@ public class OrderConfirmState implements IOrderState{
     }
 
     @Override
-    public void Confirm() {
-
-    }
+    public void Confirm() {throw new UnsupportedOperationException("Method not implemented");}
 
     @Override
     public void Cancel() {
