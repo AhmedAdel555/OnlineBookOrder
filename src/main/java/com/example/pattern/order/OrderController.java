@@ -44,7 +44,7 @@ public class OrderController {
     @PostMapping("/orders/create")
     public String createOrder(@RequestParam PaymentStarategy paymentStarategy,@RequestParam String creditCardNumber,@RequestParam String creditCardExpiry, @RequestParam String creditCardCvv){
         proxyOrderService.craeteOrder(1L, paymentStarategy, creditCardNumber,creditCardExpiry, creditCardCvv);
-        return "redirect:/purchase";
+        return "redirect:/my-orders";
     }
 
     @PostMapping("/orders/confirm/{orderId}")

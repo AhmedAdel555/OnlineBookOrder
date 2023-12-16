@@ -59,6 +59,7 @@ public class Inventory {
             }
 
             book.setNumberOfAvailableUnits(book.getNumberOfAvailableUnits() - requestedQuantity);
+            book.setPopularity(book.getPopularity() + + requestedQuantity);
             bookRepository.save(book);
         }
         return true;

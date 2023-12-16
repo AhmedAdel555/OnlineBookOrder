@@ -99,14 +99,12 @@ public class OrderService implements IOrderService{
 
         // Set credit card information if applicable
         if (String.valueOf(paymentStarategy).equalsIgnoreCase(String.valueOf(PaymentStarategy.CREDITCARD))) {
-            paymentInfo.setCreditCardNumber(creditCardNumber);
-            paymentInfo.setCreditCardExpiry(parseExpirationDate(creditCardExpiry));
-            paymentInfo.setCreditCardCvv(creditCardCvv);
+            paymentInfo.setCreditCardNumber(creditCardNumber.strip());
+            paymentInfo.setCreditCardExpiry(parseExpirationDate(creditCardExpiry.strip()));
+            paymentInfo.setCreditCardCvv(creditCardCvv.strip());
         }
         paymentInfo.setPaymentStarategy(paymentStarategy);
         orderPaymentInfoRepository.save(paymentInfo);
-
-
     }
 
     @Override
@@ -149,4 +147,5 @@ public class OrderService implements IOrderService{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
         return LocalDate.parse(expirationDate, formatter);
     }
+
 }
